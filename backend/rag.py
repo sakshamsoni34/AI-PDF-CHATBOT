@@ -119,6 +119,13 @@ def process_and_store_pdf(pdf_bytes: bytes, filename: str, document_id: str, use
     
     # 2. Chunk text keeping metadata
     chunks = chunk_text(pages_data)
+    if not chunks:
+        # Fallback if no selectable text was extracted (e.g. image-only PDF)
+        chunks = [{
+            "text": f"Document {filename} was processed, but no selectable text was found.",
+            "page": 1,
+            "filename": filename
+        }]
     print(f"Split PDF into {len(chunks)} chunks.")
     
     # 3. Generate Embeddings (batch processing)

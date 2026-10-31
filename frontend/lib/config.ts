@@ -1,2 +1,2 @@
-export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8001";
-
+const rawBackendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8001";
+export const BACKEND_URL = rawBackendUrl.replace(/\/+$/, "");

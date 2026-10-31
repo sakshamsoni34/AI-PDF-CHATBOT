@@ -111,37 +111,47 @@ export default function ChatInput({ value, onChange, onSubmit, onGenerateStudyMa
           if (data.task_id) {
             // Poll for background task status
             let completed = false;
-            while (!completed) {
-              await new Promise(r => setTimeout(r, 2000)); // Poll every 2 seconds
-              const statusRes = await fetch(`${BACKEND_URL}/upload/status/${data.task_id}`, {
-                headers: { "Authorization": `Bearer ${user?.token || ""}` }
-              });
-              if (statusRes.ok) {
-                const statusData = await statusRes.json();
-                if (statusData.status === "completed") {
-                  setActiveDocuments(prev => [...prev, ...statusData.documents]);
-                  completed = true;
-                } else if (statusData.status === "failed") {
-                  console.error("Background upload failed:", statusData.error);
-                  alert(`Upload failed: ${statusData.error}`);
-                  completed = true;
+            let attempts = 0;
+            while (!completed && attempts < 60) {
+              await new Promise(r => setTimeout(r, 1500));
+              attempts++;
+              try {
+                const statusRes = await fetch(`${BACKEND_URL}/upload/status/${data.task_id}`, {
+                  headers: { "Authorization": `Bearer ${user?.token || ""}` }
+                });
+                if (statusRes.ok) {
+                  const statusData = await statusRes.json();
+                  if (statusData.status === "completed") {
+                    setActiveDocuments(prev => [...prev, ...statusData.documents]);
+                    completed = true;
+                  } else if (statusData.status === "failed") {
+                    console.error("Background upload failed:", statusData.error);
+                    alert(`Upload failed: ${statusData.error}`);
+                    completed = true;
+                  }
                 }
-                // If "processing", loop continues
-              } else {
-                console.error("Failed to check upload status");
-                completed = true;
+              } catch (pollErr) {
+                console.warn("Status poll error:", pollErr);
               }
             }
           } else if (data.documents) {
-            // Fallback just in case
             setActiveDocuments(prev => [...prev, ...data.documents]);
           }
         } else {
-          console.error("Failed to upload PDF to Python server.");
+          let errDetail = `Server error ${res.status}`;
+          try {
+            const errJson = await res.json();
+            errDetail = errJson.detail || errJson.error || errDetail;
+          } catch {
+            const errTxt = await res.text();
+            if (errTxt) errDetail = errTxt;
+          }
+          console.error("Upload error:", errDetail);
+          alert(`Upload failed: ${errDetail}`);
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        console.error("Could not connect to Python server. Is it running?");
+        alert(`Could not connect to backend at ${BACKEND_URL}. Check if the server is active or waking up.\n\nError: ${err?.message || err}`);
       } finally {
         setIsUploading(false);
         if (fileInputRef.current) {
