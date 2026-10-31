@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+gunicorn
+python-multipart
+PyMuPDF
+huggingface-hub
+numpy
+python-dotenv
+mysql-connector-python
+cryptography
+pyjwt
+slowapi
+google-genai
+requests
+pydantic

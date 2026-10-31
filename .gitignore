@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+.venv/
+env/
+venv/
+ENV/
+
+# Environment Variables & Secrets (CRITICAL)
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+backend/.env.*
+frontend/.env.local
+frontend/.env.*
+*.pem
+*.key
+
+# Preserve example templates
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Next.js Build Outputs
+frontend/.next/
+frontend/out/
+frontend/build/
+*.tsbuildinfo
+next-env.d.ts
+frontend/iisnode/
+
+# Python Artifacts & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# User Uploads & Runtime Logs (Do not push user data)
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/logs/*
+!backend/logs/.gitkeep
+*.log
+
+# Vectorstore Local Persistence
+backend/vectorstore/*
+!backend/vectorstore/.gitkeep
+
+# IDE and OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.bak
+scratch*.txt
