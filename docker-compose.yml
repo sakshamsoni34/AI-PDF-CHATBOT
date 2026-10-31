@@ -65,3 +65,4 @@ volumes:
   mysql_data:
   backend_uploads:
   backend_logs:
+
