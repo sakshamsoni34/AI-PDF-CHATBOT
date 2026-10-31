@@ -43,10 +43,10 @@ if allowed_origins_env:
         if stripped and stripped not in allowed_origins:
             allowed_origins.append(stripped)
 
-# Regex to match localhost, Vercel deployments, and production domains
+# Regex to match localhost, local network IPs, Vercel deployments, and production domains
 allow_origin_regex = os.getenv(
     "CORS_ORIGIN_REGEX",
-    r"^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$|^https://.*\.vercel\.app$"
+    r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+)(:[0-9]+)?$|^https://.*\.vercel\.app$"
 )
 
 app.add_middleware(
