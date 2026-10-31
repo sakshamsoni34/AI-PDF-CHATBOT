@@ -48,6 +48,28 @@ def get_db_config():
         cfg["ssl_ca"] = DB_SSL_CA
     return cfg
 
+def init_db_if_needed():
+    """Ensure database exists before initializing connection pool."""
+    try:
+        cfg = {
+            "host": DB_HOST,
+            "port": DB_PORT,
+            "user": DB_USER,
+            "password": DB_PASSWORD,
+            "autocommit": True,
+        }
+        if DB_SSL_CA and os.path.exists(DB_SSL_CA):
+            cfg["ssl_ca"] = DB_SSL_CA
+        tmp_conn = mysql.connector.connect(**cfg)
+        tmp_cursor = tmp_conn.cursor()
+        tmp_cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{DB_NAME}`;")
+        tmp_cursor.close()
+        tmp_conn.close()
+    except Exception as e:
+        print(f"Notice: Could not auto-create database `{DB_NAME}`: {e}")
+
+init_db_if_needed()
+
 _db_pool = None
 try:
     _db_pool = mysql.connector.pooling.MySQLConnectionPool(

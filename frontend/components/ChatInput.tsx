@@ -186,7 +186,7 @@ export default function ChatInput({ value, onChange, onSubmit, onGenerateStudyMa
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 pb-2 z-10 relative">
+    <div className="w-full max-w-3xl mx-auto px-1 sm:px-4 pb-2 z-10 relative">
       
       {/* API Toast Notification */}
       {apiToast && (
@@ -202,7 +202,7 @@ export default function ChatInput({ value, onChange, onSubmit, onGenerateStudyMa
           {activeDocuments.map((doc) => (
             <div key={doc.id} className="relative flex items-center gap-2 bg-white dark:bg-[#282a2c] w-fit px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 text-sm text-gray-800 dark:text-gray-200 shadow-sm animate-in fade-in slide-in-from-bottom-2">
               <div className="w-2 h-2 rounded-full bg-green-400"></div>
-              <span className="truncate max-w-[200px]">{doc.name}</span>
+              <span className="truncate max-w-[120px] sm:max-w-[200px] text-xs sm:text-sm">{doc.name}</span>
               
               <button
                 onClick={() => setActiveDropdown(activeDropdown === doc.id ? null : doc.id)}
@@ -281,7 +281,7 @@ export default function ChatInput({ value, onChange, onSubmit, onGenerateStudyMa
         </div>
       )}
 
-      <div className="relative flex items-end bg-[#1a1b23]/40 backdrop-blur-2xl rounded-[24px] px-2 py-2 shadow-lg border border-gray-200 dark:border-white/10 focus-within:border-white/30 transition-all min-h-[56px]">
+      <div className="relative flex items-end bg-[#1a1b23]/60 backdrop-blur-2xl rounded-[20px] sm:rounded-[24px] px-1.5 sm:px-2 py-1.5 sm:py-2 shadow-lg border border-gray-200 dark:border-white/10 focus-within:border-white/30 transition-all min-h-[50px] sm:min-h-[56px]">
         
         {/* Hidden file input */}
         <input 
@@ -308,7 +308,7 @@ export default function ChatInput({ value, onChange, onSubmit, onGenerateStudyMa
           onChange={onChange}
           onKeyDown={handleKeyDown}
           placeholder="Ask AI-PDF..."
-          className="flex-1 bg-transparent border-none focus:outline-none text-gray-900 dark:text-white px-3 py-2.5 placeholder-gray-400 text-[15px] text-left resize-none overflow-y-auto min-h-[40px] max-h-[200px]"
+          className="flex-1 bg-transparent border-none focus:outline-none text-gray-900 dark:text-white px-2 sm:px-3 py-2 sm:py-2.5 placeholder-gray-400 text-base sm:text-[15px] text-left resize-none overflow-y-auto min-h-[38px] max-h-[160px] sm:max-h-[200px]"
           rows={1}
         />
         

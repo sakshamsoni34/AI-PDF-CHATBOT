@@ -484,60 +484,58 @@ export default function ChatArea() {
 
       {/* 3D Globe Background removed */}
 
-      <div className="absolute top-0 right-0 w-full flex justify-end items-center p-6 gap-6 z-[9999] pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-6">
-
-          
+      <div className="absolute top-0 right-0 w-full flex justify-end items-center p-3 sm:p-6 gap-2 sm:gap-6 z-30 pointer-events-none">
+        <div className="pointer-events-auto flex items-center gap-2 sm:gap-4">
           {!user ? (
             <button 
               onClick={() => openModal("login")}
-              className="px-6 py-2 text-sm font-medium text-gray-900 dark:text-white bg-[#0a57d0] hover:bg-[#0b63eb] rounded-full transition-colors shadow-sm"
+              className="px-4 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-sm font-medium text-white bg-[#0a57d0] hover:bg-[#0b63eb] rounded-full transition-colors shadow-sm"
             >
               Sign in
             </button>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-4">
               {currentMessages.length > 0 && (
-                <div className="flex items-center gap-1.5 mr-2">
+                <div className="flex items-center gap-1 sm:gap-1.5 mr-1 sm:mr-2">
                   <button 
                     type="button"
                     onClick={handleRegenerateLast}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-purple-600 dark:text-purple-400 transition-colors border border-white/5 backdrop-blur-md"
+                    className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-purple-600 dark:text-purple-400 transition-colors border border-white/5 backdrop-blur-md hidden sm:inline-flex"
                     title="Regenerate last response"
                   >
-                    <RefreshCw size={18} />
+                    <RefreshCw size={16} />
                   </button>
                   <button 
                     type="button"
                     onClick={handleCopyAll}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md"
+                    className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md hidden sm:inline-flex"
                     title="Copy full chat"
                   >
-                    <Copy size={18} />
+                    <Copy size={16} />
                   </button>
                   <button 
                     type="button"
                     onClick={handleShare}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md"
+                    className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md"
                     title="Share / Download chat"
                   >
-                    <Share2 size={18} />
+                    <Share2 size={16} />
                   </button>
                   <button 
                     type="button"
                     onClick={handleExportChat}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md"
+                    className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors border border-white/5 backdrop-blur-md hidden sm:inline-flex"
                     title="Export as Markdown"
                   >
-                    <Download size={18} />
+                    <Download size={16} />
                   </button>
                   <button 
                     type="button"
                     onClick={handleClearChat}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-red-600 dark:text-red-400 transition-colors border border-white/5 backdrop-blur-md"
+                    className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-red-600 dark:text-red-400 transition-colors border border-white/5 backdrop-blur-md"
                     title="Clear Chat"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={16} />
                   </button>
                 </div>
               )}
@@ -584,8 +582,8 @@ export default function ChatArea() {
       </div>
 
       {currentMessages.length === 0 ? (
-        <div className="flex-1 flex flex-col items-center justify-center p-4 w-full max-w-4xl mx-auto z-10 relative">
-          <h1 className="text-[36px] md:text-[44px] font-normal text-gray-900 dark:text-white mb-10 text-center tracking-tight h-[60px] flex items-center justify-center">
+        <div className="flex-1 flex flex-col items-center justify-center p-3 sm:p-4 w-full max-w-4xl mx-auto z-10 relative mt-12 sm:mt-0 overflow-y-auto custom-scrollbar">
+          <h1 className="text-2xl sm:text-3xl md:text-[44px] font-normal text-gray-900 dark:text-white mb-4 sm:mb-8 text-center tracking-tight min-h-[44px] sm:h-[60px] flex items-center justify-center px-4">
             <AnimatePresence mode="wait">
               <motion.span
                 key={currentGreetingIndex}
@@ -599,7 +597,7 @@ export default function ChatArea() {
             </AnimatePresence>
           </h1>
           
-          <div className="w-full mb-8">
+          <div className="w-full mb-4 sm:mb-8">
             <ChatInput 
               value={inputText} 
               onChange={(e) => setInputText(e.target.value)} 
@@ -608,122 +606,122 @@ export default function ChatArea() {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 w-full max-w-4xl px-2 sm:px-4 pb-4">
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Summarize this PDF in 3 bullet points")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-blue-500/50 bg-gray-200 dark:bg-white/5 hover:bg-blue-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-blue-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-blue-500/50 bg-gray-200 dark:bg-white/5 hover:bg-blue-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-blue-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <FileText size={20} className="text-blue-600 dark:text-blue-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Summarize this PDF</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Extract the main points from the document</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Summarize this PDF</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Extract the main points from the document</p>
             </motion.button>
             
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Find specific data regarding revenue")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-emerald-500/50 bg-gray-200 dark:bg-white/5 hover:bg-emerald-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-emerald-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-emerald-500/50 bg-gray-200 dark:bg-white/5 hover:bg-emerald-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-emerald-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <Search size={20} className="text-emerald-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Find specific data</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Search for exact figures or quotes</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Find specific data</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Search for exact figures or quotes</p>
             </motion.button>
             
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Explain the complex terms used on page 4")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-purple-500/50 bg-gray-200 dark:bg-white/5 hover:bg-purple-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-purple-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-purple-500/50 bg-gray-200 dark:bg-white/5 hover:bg-purple-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-purple-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <Sparkles size={20} className="text-purple-600 dark:text-purple-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Explain complex terms</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Simplify difficult concepts in the text</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Explain complex terms</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Simplify difficult concepts in the text</p>
             </motion.button>
             
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Extract Key Figures and Action Items")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-orange-500/50 bg-gray-200 dark:bg-white/5 hover:bg-orange-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-orange-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-orange-500/50 bg-gray-200 dark:bg-white/5 hover:bg-orange-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-orange-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-orange-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <FileIcon size={20} className="text-orange-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Extract Key Data</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Identify crucial figures and action items</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Extract Key Data</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Identify crucial figures and action items</p>
             </motion.button>
 
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Compare and contrast the key ideas in each document uploaded")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-sky-500/50 bg-gray-200 dark:bg-white/5 hover:bg-sky-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-sky-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-sky-500/50 bg-gray-200 dark:bg-white/5 hover:bg-sky-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-sky-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-sky-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-sky-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <GitCompare size={20} className="text-sky-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Compare Documents</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Side-by-side analysis of uploaded PDFs</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Compare Documents</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Side-by-side analysis of uploaded PDFs</p>
             </motion.button>
 
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Translate the entire document content to Hindi and summarize it")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-rose-500/50 bg-gray-200 dark:bg-white/5 hover:bg-rose-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-rose-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-rose-500/50 bg-gray-200 dark:bg-white/5 hover:bg-rose-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-rose-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-rose-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <Globe size={20} className="text-rose-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Translate to Hindi</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Summarize document in Hindi language</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Translate to Hindi</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Summarize document in Hindi language</p>
             </motion.button>
 
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("Build a chronological timeline of all events mentioned in the document")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 bg-gray-200 dark:bg-white/5 hover:bg-yellow-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-yellow-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 bg-gray-200 dark:bg-white/5 hover:bg-yellow-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-yellow-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <Clock size={20} className="text-yellow-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Build Timeline</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Extract chronological events from the PDF</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Build Timeline</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Extract chronological events from the PDF</p>
             </motion.button>
 
             <motion.button 
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleChipClick("List all definitions, key terms and their explanations from the document")} 
-              className="flex flex-col items-start p-5 rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-teal-500/50 bg-gray-200 dark:bg-white/5 hover:bg-teal-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-teal-500/20"
+              className="flex flex-col items-start p-3 sm:p-5 rounded-2xl sm:rounded-[24px] border border-gray-200 dark:border-white/10 hover:border-teal-500/50 bg-gray-200 dark:bg-white/5 hover:bg-teal-500/10 backdrop-blur-xl transition-all duration-300 text-left group shadow-lg hover:shadow-teal-500/20"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-teal-500/20 mb-3 group-hover:scale-110 transition-transform">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 mb-3 group-hover:scale-110 transition-transform">
                 <AlignLeft size={20} className="text-teal-400" />
               </div>
-              <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 mb-1">Build Glossary</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Extract all key terms and definitions</p>
+              <span className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-200 mb-0.5 sm:mb-1 line-clamp-1">Build Glossary</span>
+              <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 leading-tight line-clamp-2">Extract all key terms and definitions</p>
             </motion.button>
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto pt-24 pb-32 px-4 scroll-smooth relative z-10">
-          <div className="max-w-3xl mx-auto space-y-8">
+        <div className="flex-1 overflow-y-auto pt-16 sm:pt-24 pb-28 sm:pb-32 px-2.5 sm:px-4 scroll-smooth relative z-10">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-8">
             {currentMessages.map((msg) => (
               <ChatMessage key={msg.id} msg={msg} user={user} onEditSubmit={handleEditResend} onRegenerate={handleRegenerateMessage} onSourceClick={handleSourceClick} />
             ))}
             {isLoading && (
               <div className="flex gap-4 justify-start">
                 <div className="w-8 h-8 relative flex items-center justify-center shrink-0">
-                  <Image src="/logo.png" alt="AI" fill className="object-contain" />
+                  <Image src="/logo.png" alt="AI" fill sizes="32px" className="object-contain" />
                 </div>
                 <div className="flex items-center gap-2 px-4 py-3">
                   <div className="flex gap-1">
@@ -740,7 +738,7 @@ export default function ChatArea() {
       )}
 
       {currentMessages.length > 0 && (
-        <div className="absolute bottom-0 w-full bg-gradient-to-t from-[#0a0a0b] via-[#0a0a0b]/90 to-transparent pt-10 pb-6 px-4 z-20">
+        <div className="absolute bottom-0 w-full bg-gradient-to-t from-[#0a0a0b] via-[#0a0a0b]/95 to-transparent pt-4 sm:pt-10 pb-3 sm:pb-6 px-2.5 sm:px-4 z-20">
           <div className="max-w-3xl mx-auto">
             <ChatInput 
               value={inputText} 

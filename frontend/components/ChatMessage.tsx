@@ -75,11 +75,11 @@ const ChatMessage = React.memo(({ msg, user, onEditSubmit, onRegenerate, onSourc
     >
       {msg.role === 'bot' && (
         <div className="w-8 h-8 relative flex items-center justify-center shrink-0">
-          <Image src="/logo.png" alt="AI" fill className="object-contain" />
+          <Image src="/logo.png" alt="AI" fill sizes="32px" className="object-contain" />
         </div>
       )}
       
-      <div className={`flex flex-col gap-2 w-full max-w-[85%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+      <div className={`flex flex-col gap-2 w-full max-w-[92%] sm:max-w-[85%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
         
         {msg.role === 'bot' && msg.images && msg.images.length > 0 && (
           <div className={`grid gap-2 mb-2 w-full ${msg.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} rounded-xl overflow-hidden`}>
@@ -103,7 +103,7 @@ const ChatMessage = React.memo(({ msg, user, onEditSubmit, onRegenerate, onSourc
           </div>
         )}
 
-        <div className={`px-5 py-4 rounded-[24px] w-full shadow-lg transition-all ${msg.role === 'user' ? 'bg-gradient-to-br from-indigo-600 to-violet-600 text-white w-fit shadow-indigo-900/20 border border-indigo-500/30' : 'bg-white dark:bg-zinc-900/90 backdrop-blur-xl border border-gray-200 dark:border-white/10 text-gray-900 dark:text-gray-100 shadow-xl relative overflow-hidden'}`}>
+        <div className={`px-3.5 py-3 sm:px-5 sm:py-4 rounded-[20px] sm:rounded-[24px] w-full shadow-lg transition-all ${msg.role === 'user' ? 'bg-gradient-to-br from-indigo-600 to-violet-600 text-white w-fit shadow-indigo-900/20 border border-indigo-500/30' : 'bg-white dark:bg-zinc-900/90 backdrop-blur-xl border border-gray-200 dark:border-white/10 text-gray-900 dark:text-gray-100 shadow-xl relative overflow-hidden'}`}>
           {msg.role === 'bot' && (
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
           )}

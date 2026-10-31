@@ -121,20 +121,42 @@ export default function Sidebar() {
 
   return (
     <>
-      <button onClick={() => setIsMobileOpen(!isMobileOpen)} className="md:hidden absolute top-4 left-4 z-50 p-2 rounded-full bg-white dark:bg-[#282a2c] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-white/10">
-        {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
-      {isMobileOpen && <div className="md:hidden fixed inset-0 bg-black/40 dark:bg-black/60 z-40 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />}
+      {!isMobileOpen && (
+        <button 
+          onClick={() => setIsMobileOpen(true)} 
+          className="md:hidden fixed top-3 left-3 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 dark:bg-[#1a1b23]/90 text-gray-800 dark:text-gray-100 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-lg active:scale-95 transition-all"
+          aria-label="Open menu"
+        >
+          <Menu size={20} />
+        </button>
+      )}
+      {isMobileOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300" 
+          onClick={() => setIsMobileOpen(false)} 
+        />
+      )}
 
       <div
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => { setIsExpanded(false); setDocDropdown(null); setContextMenu(null); }}
-        className={"flex-shrink-0 bg-[#080912]/90 backdrop-blur-xl h-full flex flex-col py-4 border-r border-gray-200 dark:border-white/10 transition-all duration-300 ease-in-out relative z-40 shadow-[10px_0_30px_rgba(0,0,0,0.5)] " + (isShow ? "w-[260px] px-3 items-stretch" : "w-[68px] items-center") + " " + (isMobileOpen ? "fixed left-0 top-0 bottom-0 translate-x-0 !w-[260px] px-3 !items-stretch" : "fixed -translate-x-full md:relative md:translate-x-0")}
+        className={"flex-shrink-0 bg-[#080912]/95 backdrop-blur-2xl h-full flex flex-col py-4 border-r border-gray-200 dark:border-white/10 transition-all duration-300 ease-in-out relative z-50 shadow-[10px_0_30px_rgba(0,0,0,0.5)] " + (isShow ? "w-[260px] px-3 items-stretch" : "w-[68px] items-center") + " " + (isMobileOpen ? "fixed left-0 top-0 bottom-0 translate-x-0 !w-[80vw] max-w-[280px] px-3 !items-stretch rounded-r-3xl" : "fixed -translate-x-full md:relative md:translate-x-0")}
       >
         <div className={"flex flex-col gap-1 w-full " + (!isShow ? "items-center" : "")}>
-          <div className={"flex items-center gap-3 px-2.5 py-2 mb-2 " + (!isShow ? "justify-center" : "")}>
-            <div className="w-8 h-8 relative shrink-0"><Image src="/logo.png" alt="Logo" fill className="object-contain" /></div>
-            {isShow && <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 truncate tracking-wide">AI PDF CHATBOT</span>}
+          <div className={"flex items-center justify-between px-2.5 py-2 mb-2 " + (!isShow ? "justify-center" : "")}>
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-8 h-8 relative shrink-0"><Image src="/logo.png" alt="Logo" fill sizes="32px" className="object-contain" /></div>
+              {isShow && <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 truncate tracking-wide">AI PDF CHATBOT</span>}
+            </div>
+            {isMobileOpen && (
+              <button 
+                onClick={() => setIsMobileOpen(false)}
+                className="md:hidden p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={20} />
+              </button>
+            )}
           </div>
 
           <button onClick={() => { createNewSession(); setIsMobileOpen(false); }}
